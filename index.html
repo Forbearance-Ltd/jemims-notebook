@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌸 Ruhi's NoteBook — Isme Jemim Ruhi Edition</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --peach-bg: #FFF6F0;
+      --peach-card: #FFFFFF;
+      --peach-border: #F5E0D3;
+      --peach-accent: #FB923C;
+      --peach-active: #FED7AA;
+      --peach-text: #2D241E;
+    }
+
+    /* Proven Dyslexia-friendly system fonts */
+    .font-dyslexia {
+      font-family: 'Comic Sans MS', 'Comic Neue', 'Trebuchet MS', 'Verdana', sans-serif;
+      letter-spacing: 0.08em;
+      word-spacing: 0.16em;
+      line-height: 2.05;
+    }
+    .font-clean {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      letter-spacing: 0.05em;
+      word-spacing: 0.12em;
+      line-height: 1.95;
+    }
+    .font-serif-soft {
+      font-family: 'Georgia', serif;
+      letter-spacing: 0.06em;
+      word-spacing: 0.14em;
+      line-height: 2.0;
+    }
+
+    /* Word highlight classes in gentle peachy pastels */
+    .word-active {
+      background-color: #FED7AA !important; /* Soft warm glowing peach */
+      color: #431407 !important;
+      border-radius: 6px;
+      padding: 2px 7px;
+      box-shadow: 0 3px 12px rgba(251, 146, 60, 0.35);
+      transform: scale(1.06);
+      display: inline-block;
+      transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .word-spoken {
+      color: #065F46 !important;
+      background-color: #D1FAE5 !important; /* Soft pastel mint */
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+
+    /* Line focus overlay with peachy calm */
+    .reading-ruler-active {
+      box-shadow: 0 0 0 9999px rgba(255, 246, 240, 0.85);
+      position: relative;
+      z-index: 20;
+      border-radius: 10px;
+      background: rgba(254, 215, 170, 0.35);
+    }
+
+    /* Custom smooth peachy scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FFF1E8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #F8D5C2;
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #F3BC9E;
+    }
+  </style>
+</head>
+<body class="bg-[#FFF6F0] text-[#2D241E] min-h-screen antialiased flex flex-col font-sans selection:bg-[#FED7AA] selection:text-[#431407]">
+
+  <!-- Header with Personal Peachy Branding -->
+  <header class="border-b border-[#F5E0D3] bg-white/90 backdrop-blur sticky top-0 z-30 px-6 py-3.5 flex items-center justify-between shadow-xs">
+    <div class="flex items-center gap-3.5">
+      <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#FED7AA] via-[#FDBA74] to-[#FCA5A5] text-[#431407] font-extrabold flex items-center justify-center text-sm shadow-xs border border-[#FDBA74]/50 tracking-wider">
+        RUHI
+      </div>
+      <div>
+        <h1 class="text-base font-bold text-stone-800 tracking-tight flex items-center gap-2">
+          Ruhi's NoteBook
+          <span class="text-[11px] font-semibold bg-[#FFF0E6] text-[#C2410C] px-2.5 py-0.5 rounded-full border border-[#FED7AA]">Isme Jemim Ruhi Edition</span>
+        </h1>
+        <p class="text-xs text-stone-500 flex items-center gap-1.5">
+          <span>Crafted with love by Abid</span>
+          <span class="text-rose-400">♥</span>
+          <span>Classroom Pacing Suite</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Mode Status & Fullscreen -->
+    <div class="flex items-center gap-3">
+      <div id="statusPill" class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF0E6] border border-[#FED7AA]/80 text-xs font-medium text-stone-700 shadow-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="statusText">Welcome, Ruhi ✨ Ready for class</span>
+      </div>
+      <button id="toggleFullscreenBtn" class="p-2 rounded-xl bg-white hover:bg-[#FFF0E6] border border-[#F5E0D3] text-stone-600 hover:text-[#C2410C] transition shadow-xs" title="Toggle Fullscreen">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Left Controls Panel (Warm Peachy Cards) -->
+    <aside class="lg:col-span-4 space-y-5">
+
+      <!-- Pacer & Speed Card (Soft Peach Accent) -->
+      <div class="bg-white/95 border border-[#F5E0D3] rounded-2xl p-5 shadow-xs space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold text-stone-700 uppercase tracking-wider flex items-center gap-2">
+            <span>🌸</span> Ruhi's Pacing Coach
+          </h2>
+          <span id="wpmDisplay" class="text-xs font-bold bg-[#FFEDD5] text-[#9A3412] border border-[#FED7AA] px-3 py-1 rounded-full">
+            105 WPM
+          </span>
+        </div>
+
+        <!-- Speed Slider -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs text-stone-500 font-medium">
+            <span>Calm & Peaceful (70)</span>
+            <span>Teaching Pace</span>
+            <span>Brisk (200)</span>
+          </div>
+          <input id="wpmSlider" type="range" min="60" max="220" value="105" step="5"
+            class="w-full h-2.5 bg-[#FFF0E6] rounded-lg appearance-none cursor-pointer accent-[#FB923C] border border-[#F5E0D3]">
+        </div>
+
+        <!-- Primary Actions -->
+        <div class="grid grid-cols-2 gap-2.5 pt-1">
+          <button id="startPacerBtn" class="col-span-2 py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-[#FED7AA] via-[#FDBA74] to-[#FCA5A5] hover:from-[#FDBA74] hover:to-[#FB923C] text-[#431407] border border-[#FDBA74] shadow-sm active:scale-98 transition flex items-center justify-center gap-2">
+            <svg id="playIcon" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <span id="playBtnText">Start Gentle Pacer</span>
+          </button>
+          
+          <button id="resetPacerBtn" class="py-2.5 px-3 rounded-xl text-xs font-semibold bg-[#FFF6F0] hover:bg-[#FFEFE6] text-stone-700 border border-[#F5E0D3] transition flex items-center justify-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Restart Passage
+          </button>
+
+          <button id="listenAloudBtn" class="py-2.5 px-3 rounded-xl text-xs font-semibold bg-[#FDF2F8] hover:bg-[#FCE7F3] text-pink-700 border border-pink-200 transition flex items-center justify-center gap-1.5">
+            <span>🎧</span> Listen & Shadow
+          </button>
+        </div>
+
+        <!-- Speech Practice Mode (Soft Mint) -->
+        <div class="pt-2 border-t border-[#F7E6DC]">
+          <button id="micPracticeBtn" class="w-full py-2.5 px-3 rounded-xl text-xs font-bold border border-emerald-200 bg-emerald-50/80 hover:bg-emerald-100 text-emerald-800 transition flex items-center justify-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span id="micBtnText">Ruhi's Classroom Voice Practice</span>
+          </button>
+          <p class="text-[11px] text-stone-500 mt-1.5 text-center">Read into the mic; every word spoken turns gentle pastel green.</p>
+        </div>
+      </div>
+
+      <!-- Ruhi's Pastel Paper Tints (Peachy Palette) -->
+      <div class="bg-white/95 border border-[#F5E0D3] rounded-2xl p-5 shadow-xs space-y-4">
+        <h2 class="text-xs font-bold text-stone-700 uppercase tracking-wider flex items-center gap-2">
+          <span>🎨</span> Ruhi's Pastel Paper Tints
+        </h2>
+
+        <!-- Background Tints -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-medium text-stone-600">Anti-glare paper shades for your eyes:</label>
+          <div class="grid grid-cols-4 gap-2" id="tintSelector">
+            <button data-tint="peach" class="tint-btn active py-2 rounded-xl text-xs font-bold border-2 border-[#FB923C] text-[#431407] bg-[#FFF0E5] flex flex-col items-center gap-1 shadow-xs">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#fedbc4] border border-[#FB923C]"></span>
+              Peach
+            </button>
+            <button data-tint="cream" class="tint-btn py-2 rounded-xl text-xs font-semibold border border-[#F5E0D3] text-stone-800 bg-[#FFF9ED] flex flex-col items-center gap-1">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#fdeecf]"></span>
+              Vanilla
+            </button>
+            <button data-tint="lavender" class="tint-btn py-2 rounded-xl text-xs font-semibold border border-[#F5E0D3] text-stone-800 bg-[#F4F0FB] flex flex-col items-center gap-1">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#e3d7f8]"></span>
+              Lilac
+            </button>
+            <button data-tint="mint" class="tint-btn py-2 rounded-xl text-xs font-semibold border border-[#F5E0D3] text-stone-800 bg-[#EEF7F2] flex flex-col items-center gap-1">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#d0ecdd]"></span>
+              Matcha
+            </button>
+          </div>
+        </div>
+
+        <!-- Typography Modes -->
+        <div class="grid grid-cols-2 gap-3 pt-1">
+          <div class="space-y-1">
+            <label class="text-xs font-medium text-stone-600">Comfort Font:</label>
+            <select id="fontSelect" class="w-full bg-[#FFFBF8] border border-[#F5E0D3] rounded-xl px-2.5 py-2 text-xs text-stone-700 font-medium focus:outline-none focus:border-[#FB923C]">
+              <option value="font-dyslexia" selected>Comic / Dyslexia</option>
+              <option value="font-clean">Clean Modern Sans</option>
+              <option value="font-serif-soft">Soft Warm Serif</option>
+            </select>
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-medium text-stone-600">Text Size:</label>
+            <div class="flex items-center gap-1 bg-[#FFFBF8] rounded-xl p-1 border border-[#F5E0D3]">
+              <button id="decreaseFontBtn" class="flex-1 py-1 text-center font-bold text-stone-600 hover:bg-[#FED7AA]/50 rounded-lg">A-</button>
+              <span id="fontSizeDisplay" class="text-xs font-mono font-bold text-stone-800 px-1">22px</span>
+              <button id="increaseFontBtn" class="flex-1 py-1 text-center font-bold text-stone-600 hover:bg-[#FED7AA]/50 rounded-lg">A+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dyslexia Toggles (Peachy switches) -->
+        <div class="pt-2 space-y-2 border-t border-[#F7E6DC]">
+          <!-- Bionic Reading Toggle -->
+          <label class="flex items-center justify-between cursor-pointer p-2 rounded-xl hover:bg-[#FFF6F0] transition">
+            <div>
+              <span class="text-xs font-semibold text-stone-800 block">Bionic Word Anchors</span>
+              <span class="text-[11px] text-stone-500">Bolds word beginnings to anchor eye movement</span>
+            </div>
+            <input id="bionicToggle" type="checkbox" class="sr-only peer">
+            <div class="w-9 h-5 bg-stone-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#FB923C] relative"></div>
+          </label>
+
+          <!-- Reading Ruler Focus Toggle -->
+          <label class="flex items-center justify-between cursor-pointer p-2 rounded-xl hover:bg-[#FFF6F0] transition">
+            <div>
+              <span class="text-xs font-semibold text-stone-800 block">Ruhi's Line Focus Ruler</span>
+              <span class="text-[11px] text-stone-500">Softly dims surrounding lines to prevent jumping</span>
+            </div>
+            <input id="rulerToggle" type="checkbox" class="sr-only peer" checked>
+            <div class="w-9 h-5 bg-stone-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#FB923C] relative"></div>
+          </label>
+        </div>
+
+      </div>
+
+      <!-- Quick Text Loaders -->
+      <div class="bg-white/95 border border-[#F5E0D3] rounded-2xl p-4 shadow-xs flex items-center justify-between text-xs text-stone-600">
+        <span class="font-medium text-stone-500">Ruhi's Pre-loaded Material:</span>
+        <div class="flex gap-2">
+          <button id="loadClassroomSample" class="px-3 py-1.5 rounded-lg bg-[#FFF6F0] hover:bg-[#FFEFE6] text-[#C2410C] font-semibold transition border border-[#FED7AA]">
+            Teacher Ruhi's Speech
+          </button>
+          <button id="loadBookSample" class="px-3 py-1.5 rounded-lg bg-[#FFF6F0] hover:bg-[#FFEFE6] text-stone-700 font-medium transition border border-[#F5E0D3]">
+            Literature Chapter
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Right Reading Canvas (Velvet Soft Peach Paper) -->
+    <main class="lg:col-span-8 flex flex-col gap-4">
+
+      <!-- Text Input Tab & Edit Switch -->
+      <div class="flex items-center justify-between bg-white/95 border border-[#F5E0D3] px-5 py-3 rounded-2xl shadow-xs">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-medium text-stone-500">Ruhi's Reading Page:</span>
+          <span id="activeStats" class="text-xs font-bold text-[#9A3412] bg-[#FFEDD5] border border-[#FED7AA] px-2.5 py-0.5 rounded-full">Ready</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="editToggleBtn" class="text-xs px-3.5 py-1.5 rounded-xl bg-[#FFF6F0] hover:bg-[#FFEFE6] text-[#C2410C] font-semibold transition flex items-center gap-1.5 border border-[#FED7AA]">
+            <svg class="w-3.5 h-3.5 text-[#C2410C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+            <span id="editBtnText">Paste Ruhi's Own Class Notes</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Paste/Edit Box (Hidden by default) -->
+      <div id="pasteContainer" class="hidden bg-white border border-[#F5E0D3] rounded-2xl p-5 shadow-sm space-y-3">
+        <textarea id="rawTextInput" rows="6" class="w-full bg-[#FFFBF8] border border-[#F5E0D3] rounded-xl p-3.5 text-sm text-[#2D241E] font-sans focus:outline-none focus:border-[#FB923C] placeholder:text-stone-400" placeholder="Paste your lesson notes, textbook chapter, or classroom lecture here, Ruhi..."></textarea>
+        <div class="flex justify-end gap-2">
+          <button id="cancelEditBtn" class="px-4 py-2 rounded-xl text-xs font-semibold text-stone-500 hover:text-stone-800 transition">Cancel</button>
+          <button id="applyTextBtn" class="px-5 py-2 rounded-xl text-xs font-bold bg-[#FED7AA] hover:bg-[#FDBA74] text-[#431407] border border-[#FB923C] transition shadow-xs">Format for Ruhi</button>
+        </div>
+      </div>
+
+      <!-- The Main Pastel Paper Surface (Warm Peach Paper by default) -->
+      <div id="readingPaper" class="relative flex-1 bg-[#FFF0E5] text-[#2E221B] font-dyslexia rounded-2xl p-8 md:p-12 shadow-sm border border-[#F5E0D3] min-h-[520px] max-h-[75vh] overflow-y-auto leading-relaxed select-none transition-colors duration-200">
+        
+        <!-- Text content rendered here -->
+        <div id="readerContent" class="space-y-6 text-[22px]">
+          <!-- Interactive spans populated dynamically -->
+        </div>
+
+      </div>
+
+      <!-- Bottom Loving Dedication & Hint Bar -->
+      <div class="flex flex-wrap items-center justify-between text-xs text-stone-500 px-2 py-1 font-medium">
+        <div class="flex items-center gap-4">
+          <span>💡 <strong>Tip:</strong> Press <kbd class="px-2 py-0.5 rounded-md bg-white border border-[#F5E0D3] text-[#431407] font-mono text-[11px] shadow-xs">Spacebar</kbd> to Start/Pause</span>
+          <span>Click any word to anchor there</span>
+        </div>
+        <div class="text-[11px] text-[#C2410C] font-semibold flex items-center gap-1 bg-[#FFF0E6] px-3 py-1 rounded-full border border-[#FED7AA]/60">
+          <span>Built with love by Mohammad Abid Miah for Isme Jemim Ruhi</span>
+          <span class="text-rose-500">❤️</span>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Client JavaScript Logic -->
+  <script>
+    // Sample Texts Tailored for Ruhi
+    const samples = {
+      classroom: `Good morning, everyone. Welcome to our class. I am so glad to see all of you here today.
+
+Today, we are going to explore how knowledge shapes our world. Learning is not about rushing to be the fastest in the room. Real learning is about curiosity, patience, and seeing beauty in every small step.
+
+Each of you brings a unique perspective to this classroom. When you believe in your own voice and take your time, every challenge becomes a strength. Please open your books, and let us begin our journey together.`,
+      book: `The morning sun cast a gentle golden warmth across the quiet courtyard. Rows of tall green trees swayed softly in the breeze, filling the air with the scent of fresh rain.
+
+Ruhi held the journal in her hands. She took a slow, deep breath, letting calm confidence settle in her heart. She knew that her voice was a gift, and every word she shared with her students carried care and wisdom.
+
+With a peaceful smile, she began to read. Her voice was steady, clear, and full of grace, captivating every listening ear in the room.`
+    };
+
+    // Pastel Tint Presets (Peach default)
+    const tints = {
+      peach: { bg: '#FFF0E5', text: '#2E221B' },    // Soft Velvet Peach
+      cream: { bg: '#FFF9ED', text: '#2D2A26' },    // Warm Vanilla
+      lavender: { bg: '#F4F0FB', text: '#272033' }, // Soft Lilac
+      mint: { bg: '#EEF7F2', text: '#1B2C23' }      // Soft Matcha
+    };
+
+    // State Variables (Restored from localStorage if available)
+    let currentRawText = localStorage.getItem('ruhi_saved_text') || samples.classroom;
+    let words = [];
+    let activeWordIndex = 0;
+    let isPacing = false;
+    let pacerInterval = null;
+    let currentWPM = parseInt(localStorage.getItem('ruhi_wpm') || '105', 10);
+    let currentFontSize = parseInt(localStorage.getItem('ruhi_font_size') || '22', 10);
+    let currentFont = localStorage.getItem('ruhi_font') || 'font-dyslexia';
+    let currentTint = localStorage.getItem('ruhi_tint') || 'peach';
+    let isBionic = localStorage.getItem('ruhi_bionic') === 'true';
+    let isRuler = localStorage.getItem('ruhi_ruler') !== 'false';
+    let recognition = null;
+    let isMicActive = false;
+
+    // DOM Elements
+    const readerContent = document.getElementById('readerContent');
+    const readingPaper = document.getElementById('readingPaper');
+    const startPacerBtn = document.getElementById('startPacerBtn');
+    const playBtnText = document.getElementById('playBtnText');
+    const playIcon = document.getElementById('playIcon');
+    const resetPacerBtn = document.getElementById('resetPacerBtn');
+    const wpmSlider = document.getElementById('wpmSlider');
+    const wpmDisplay = document.getElementById('wpmDisplay');
+    const fontSelect = document.getElementById('fontSelect');
+    const bionicToggle = document.getElementById('bionicToggle');
+    const rulerToggle = document.getElementById('rulerToggle');
+    const increaseFontBtn = document.getElementById('increaseFontBtn');
+    const decreaseFontBtn = document.getElementById('decreaseFontBtn');
+    const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+    const tintButtons = document.querySelectorAll('.tint-btn');
+    const editToggleBtn = document.getElementById('editToggleBtn');
+    const pasteContainer = document.getElementById('pasteContainer');
+    const rawTextInput = document.getElementById('rawTextInput');
+    const applyTextBtn = document.getElementById('applyTextBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const loadClassroomSample = document.getElementById('loadClassroomSample');
+    const loadBookSample = document.getElementById('loadBookSample');
+    const listenAloudBtn = document.getElementById('listenAloudBtn');
+    const micPracticeBtn = document.getElementById('micPracticeBtn');
+    const statusText = document.getElementById('statusText');
+    const activeStats = document.getElementById('activeStats');
+    const toggleFullscreenBtn = document.getElementById('toggleFullscreenBtn');
+
+    // Initialize Reader
+    function formatAndRenderText(text) {
+      readerContent.innerHTML = '';
+      const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+      let wordCounter = 0;
+
+      paragraphs.forEach((para, pIdx) => {
+        const pElem = document.createElement('p');
+        pElem.className = 'paragraph-block transition-opacity duration-200';
+        pElem.dataset.pindex = pIdx;
+
+        const rawWords = para.split(/\s+/).filter(w => w.length > 0);
+        rawWords.forEach((word) => {
+          const span = document.createElement('span');
+          span.className = 'reader-word cursor-pointer inline-block rounded px-0.5 transition-all duration-75';
+          span.dataset.index = wordCounter;
+
+          // Render Word with Bionic or Normal
+          span.innerHTML = isBionic ? makeBionic(word) : word;
+          
+          span.addEventListener('click', () => {
+            jumpToWord(parseInt(span.dataset.index, 10));
+          });
+
+          pElem.appendChild(span);
+          pElem.appendChild(document.createTextNode(' '));
+          wordCounter++;
+        });
+
+        readerContent.appendChild(pElem);
+      });
+
+      words = document.querySelectorAll('.reader-word');
+      activeStats.innerText = `${words.length} Words for Ruhi`;
+      updateActiveWordHighlight();
+    }
+
+    // Bionic Word Transformation (Bolds first ~45% of characters)
+    function makeBionic(word) {
+      if (word.length <= 1) return `<strong>${word}</strong>`;
+      const mid = Math.ceil(word.length * 0.45);
+      const boldPart = word.slice(0, mid);
+      const rest = word.slice(mid);
+      return `<strong class="font-extrabold text-[#1F1712]">${boldPart}</strong>${rest}`;
+    }
+
+    // Word Pacer Runner
+    function startPacer() {
+      if (isPacing) return;
+      isPacing = true;
+      playBtnText.innerText = "Pause Pacer";
+      playIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
+      statusText.innerText = `Pacing smoothly at ${currentWPM} WPM`;
+
+      const delayMs = (60 / currentWPM) * 1000;
+      pacerInterval = setInterval(() => {
+        if (activeWordIndex < words.length - 1) {
+          activeWordIndex++;
+          updateActiveWordHighlight();
+        } else {
+          stopPacer();
+        }
+      }, delayMs);
+    }
+
+    function stopPacer() {
+      isPacing = false;
+      clearInterval(pacerInterval);
+      playBtnText.innerText = "Resume Pacing";
+      playIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+      statusText.innerText = "Pacer Paused. Take your time, Ruhi ✨";
+    }
+
+    function resetPacer() {
+      stopPacer();
+      activeWordIndex = 0;
+      updateActiveWordHighlight();
+      playBtnText.innerText = "Start Gentle Pacer";
+      readingPaper.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function jumpToWord(index) {
+      activeWordIndex = Math.min(Math.max(0, index), words.length - 1);
+      updateActiveWordHighlight();
+    }
+
+    // Active Word & Line-Focus Highlighting
+    function updateActiveWordHighlight() {
+      words.forEach((w, idx) => {
+        if (idx === activeWordIndex) {
+          w.classList.add('word-active');
+          w.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          w.classList.remove('word-active');
+        }
+      });
+
+      // Reading Ruler (Dim non-active paragraphs smoothly)
+      if (isRuler && words[activeWordIndex]) {
+        const activePara = words[activeWordIndex].closest('.paragraph-block');
+        document.querySelectorAll('.paragraph-block').forEach(p => {
+          if (p === activePara) {
+            p.style.opacity = '1.0';
+            p.style.filter = 'none';
+          } else {
+            p.style.opacity = '0.36';
+            p.style.filter = 'blur(0.2px)';
+          }
+        });
+      } else {
+        document.querySelectorAll('.paragraph-block').forEach(p => {
+          p.style.opacity = '1.0';
+          p.style.filter = 'none';
+        });
+      }
+    }
+
+    // Shadow Read (Web Speech Synthesis API)
+    let synth = window.speechSynthesis;
+    let isSpeaking = false;
+
+    function startShadowReading() {
+      if (!synth) {
+        alert("Text-to-speech is not supported on this browser.");
+        return;
+      }
+      if (synth.speaking) {
+        synth.cancel();
+        listenAloudBtn.innerHTML = `<span>🎧</span> Listen & Shadow`;
+        isSpeaking = false;
+        return;
+      }
+
+      const textToSpeak = Array.from(words).slice(activeWordIndex).map(w => w.innerText).join(' ');
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = (currentWPM / 125);
+
+      utterance.onboundary = function(event) {
+        if (event.name === 'word') {
+          activeWordIndex++;
+          if (activeWordIndex < words.length) {
+            updateActiveWordHighlight();
+          }
+        }
+      };
+
+      utterance.onend = function() {
+        listenAloudBtn.innerHTML = `<span>🎧</span> Listen & Shadow`;
+        isSpeaking = false;
+      };
+
+      synth.speak(utterance);
+      listenAloudBtn.innerHTML = `<span>⏹️</span> Stop Audio`;
+      isSpeaking = true;
+    }
+
+    // Speech-to-Text Microphone Practice Mode
+    function setupSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        micPracticeBtn.classList.add('opacity-50');
+        micPracticeBtn.innerHTML = `<span>🎙️</span> Mic not supported in this browser`;
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+
+      recognition.onresult = function(event) {
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          const spoken = event.results[i][0].transcript.trim().toLowerCase().split(/\s+/);
+          const latestWord = spoken[spoken.length - 1];
+
+          if (words[activeWordIndex]) {
+            const targetWord = words[activeWordIndex].innerText.toLowerCase().replace(/[^a-z0-9]/g, '');
+            if (latestWord.includes(targetWord) || targetWord.includes(latestWord)) {
+              words[activeWordIndex].classList.add('word-spoken');
+              activeWordIndex++;
+              updateActiveWordHighlight();
+            }
+          }
+        }
+      };
+
+      recognition.onerror = function() {
+        stopMicPractice();
+      };
+    }
+
+    function toggleMicPractice() {
+      if (!recognition) return;
+      if (!isMicActive) {
+        try {
+          recognition.start();
+          isMicActive = true;
+          micBtnText.innerText = "Listening... Read with confidence, Ruhi";
+          micPracticeBtn.classList.replace('bg-emerald-50/80', 'bg-emerald-100');
+        } catch (e) {
+          console.warn(e);
+        }
+      } else {
+        stopMicPractice();
+      }
+    }
+
+    function stopMicPractice() {
+      if (recognition && isMicActive) {
+        recognition.stop();
+        isMicActive = false;
+        micBtnText.innerText = "Ruhi's Classroom Voice Practice";
+        micPracticeBtn.classList.replace('bg-emerald-100', 'bg-emerald-50/80');
+      }
+    }
+
+    // Tint Switcher Function
+    function applyTint(tintKey) {
+      currentTint = tintKey;
+      localStorage.setItem('ruhi_tint', tintKey);
+      tintButtons.forEach(b => {
+        b.classList.remove('active', 'border-2', 'border-[#FB923C]');
+        if (b.dataset.tint === tintKey) {
+          b.classList.add('active', 'border-2', 'border-[#FB923C]');
+        }
+      });
+      const tint = tints[tintKey] || tints.peach;
+      readingPaper.style.backgroundColor = tint.bg;
+      readingPaper.style.color = tint.text;
+    }
+
+    // Event Listeners
+    startPacerBtn.addEventListener('click', () => {
+      isPacing ? stopPacer() : startPacer();
+    });
+
+    resetPacerBtn.addEventListener('click', resetPacer);
+
+    wpmSlider.addEventListener('input', (e) => {
+      currentWPM = parseInt(e.target.value, 10);
+      wpmDisplay.innerText = `${currentWPM} WPM`;
+      localStorage.setItem('ruhi_wpm', currentWPM);
+      if (isPacing) {
+        stopPacer();
+        startPacer();
+      }
+    });
+
+    fontSelect.addEventListener('change', (e) => {
+      currentFont = e.target.value;
+      localStorage.setItem('ruhi_font', currentFont);
+      readingPaper.classList.remove('font-dyslexia', 'font-clean', 'font-serif-soft');
+      readingPaper.classList.add(currentFont);
+    });
+
+    increaseFontBtn.addEventListener('click', () => {
+      if (currentFontSize < 34) {
+        currentFontSize += 2;
+        readerContent.style.fontSize = `${currentFontSize}px`;
+        fontSizeDisplay.innerText = `${currentFontSize}px`;
+        localStorage.setItem('ruhi_font_size', currentFontSize);
+      }
+    });
+
+    decreaseFontBtn.addEventListener('click', () => {
+      if (currentFontSize > 16) {
+        currentFontSize -= 2;
+        readerContent.style.fontSize = `${currentFontSize}px`;
+        fontSizeDisplay.innerText = `${currentFontSize}px`;
+        localStorage.setItem('ruhi_font_size', currentFontSize);
+      }
+    });
+
+    bionicToggle.addEventListener('change', (e) => {
+      isBionic = e.target.checked;
+      localStorage.setItem('ruhi_bionic', isBionic);
+      formatAndRenderText(currentRawText);
+    });
+
+    rulerToggle.addEventListener('change', (e) => {
+      isRuler = e.target.checked;
+      localStorage.setItem('ruhi_ruler', isRuler);
+      updateActiveWordHighlight();
+    });
+
+    tintButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyTint(btn.dataset.tint);
+      });
+    });
+
+    // Fullscreen Toggle
+    if (toggleFullscreenBtn) {
+      toggleFullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => console.log(err));
+        } else {
+          document.exitFullscreen();
+        }
+      });
+    }
+
+    // Spacebar & Arrow Key Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        isPacing ? stopPacer() : startPacer();
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        if (activeWordIndex < words.length - 1) {
+          activeWordIndex++;
+          updateActiveWordHighlight();
+        }
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        if (activeWordIndex > 0) {
+          activeWordIndex--;
+          updateActiveWordHighlight();
+        }
+      }
+    });
+
+    // Edit & Paste Logic
+    editToggleBtn.addEventListener('click', () => {
+      pasteContainer.classList.toggle('hidden');
+      rawTextInput.value = currentRawText;
+      if (!pasteContainer.classList.contains('hidden')) {
+        rawTextInput.focus();
+      }
+    });
+
+    cancelEditBtn.addEventListener('click', () => {
+      pasteContainer.classList.add('hidden');
+    });
+
+    applyTextBtn.addEventListener('click', () => {
+      if (rawTextInput.value.trim().length > 0) {
+        currentRawText = rawTextInput.value.trim();
+        localStorage.setItem('ruhi_saved_text', currentRawText);
+        pasteContainer.classList.add('hidden');
+        resetPacer();
+        formatAndRenderText(currentRawText);
+      }
+    });
+
+    loadClassroomSample.addEventListener('click', () => {
+      currentRawText = samples.classroom;
+      localStorage.setItem('ruhi_saved_text', currentRawText);
+      resetPacer();
+      formatAndRenderText(currentRawText);
+    });
+
+    loadBookSample.addEventListener('click', () => {
+      currentRawText = samples.book;
+      localStorage.setItem('ruhi_saved_text', currentRawText);
+      resetPacer();
+      formatAndRenderText(currentRawText);
+    });
+
+    listenAloudBtn.addEventListener('click', startShadowReading);
+    micPracticeBtn.addEventListener('click', toggleMicPractice);
+
+    // Initial Load & Restoration
+    wpmSlider.value = currentWPM;
+    wpmDisplay.innerText = `${currentWPM} WPM`;
+    fontSelect.value = currentFont;
+    readingPaper.classList.remove('font-dyslexia', 'font-clean', 'font-serif-soft');
+    readingPaper.classList.add(currentFont);
+    bionicToggle.checked = isBionic;
+    rulerToggle.checked = isRuler;
+    fontSizeDisplay.innerText = `${currentFontSize}px`;
+    readerContent.style.fontSize = `${currentFontSize}px`;
+
+    applyTint(currentTint);
+    setupSpeechRecognition();
+    formatAndRenderText(currentRawText);
+  </script>
+</body>
+</html>
